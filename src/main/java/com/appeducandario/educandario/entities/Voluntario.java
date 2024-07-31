@@ -1,12 +1,9 @@
 package com.appeducandario.educandario.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-// import jakarta.persistence.JoinColumn;
-// import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.util.Set;
+
 @Entity
 @Table(name="tb_voluntario")
 public class Voluntario {
@@ -15,14 +12,10 @@ public class Voluntario {
     private Long id;
     private String nome;
     private String email;
-    private String atividade;
-    private String hora;
-    private String data;
-    private String faixaEtaria;
 
-    //  @ManyToOne
-    // @JoinColumn(name = "tb_atividades")
-    private Atividades atividades;
+    @ManyToMany
+    @JoinTable(name = "VOLUNTARIO_ATIVIDADE_MAPPING", joinColumns = @JoinColumn(name ="voluntario_id"), inverseJoinColumns = @JoinColumn(name = "atividade_id"))
+    private Set<Atividade> atividadeds;
 
     public Voluntario () {
     }    
@@ -49,37 +42,5 @@ public class Voluntario {
   
       public void  setEmail(String email){
         this.email = email;
-      }
-      
-      public String getAtividade(){
-        return atividade;
-      }
-  
-      public void  setAtividade(String atividade){
-        this.atividade = atividade;
-      }
-
-      public String getHorario(){
-        return hora;
-      }
-  
-      public void  setHorario(String hora){
-        this.hora = hora;
-      }
-
-      public String getData(){
-        return data;
-      }
-  
-      public void  setData(String data){
-        this.data = data;
-      }
-
-      public String getFaixaEtaria(){
-        return faixaEtaria;
-      }
-  
-      public void  setFaixaEtaria(String faixaEtaria){
-        this.faixaEtaria = faixaEtaria;
       }
 }
