@@ -1,18 +1,12 @@
-package com.appeducandario.educandario.entites;
+package com.appeducandario.educandario.entities;
 
-// import com.appeducandario.educandario.entities.Voluntario;
+import jakarta.persistence.*;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-// import jakarta.persistence.JoinColumn;
-// import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import java.util.Set;
 
 @Entity
-@Table(name="tb_atividades")
-public class Atividades {
+@Table(name="tb_atividade")
+public class Atividade {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private long id;
@@ -20,15 +14,16 @@ public class Atividades {
     private String data;
     private String descricao;
     private String hora;
-    private String turma;
-//     @ManyToOne
-// @JoinColumn(name = "tb_voluntario")
-//     private Voluntario voluntario;
 
-    // ArrayList<String> voluntarios = new ArrayList<String>();
-    // voluntarios.add();
+    @ManyToMany
+    @JoinTable(name = "VOLUNTARIO_ATIVIDADE_MAPPING", joinColumns = @JoinColumn(name ="atividade_id"), inverseJoinColumns = @JoinColumn(name = "voluntario_id"))
+    private Set<Voluntario> voluntarios;
 
-    public Atividades (){
+    @ManyToMany
+    @JoinTable(name = "CRIANCA_ATIVIDADE_MAPPING", joinColumns = @JoinColumn(name ="atividade_id"), inverseJoinColumns = @JoinColumn(name = "crianca_id"))
+    private Set<Crianca> criancas;
+
+    public Atividade(){
     }
 
     public Long getId(){
@@ -55,7 +50,6 @@ public class Atividades {
         this.data = data;
       }
 
-      
       public String getDescricao(){
         return descricao;
       }
@@ -71,14 +65,5 @@ public class Atividades {
       public void  setHora(String hora){
         this.hora = hora;
       }
-    
-      public String getTurma(){
-        return turma;
-      }
-  
-      public void  setTurma(String turma){
-        this.turma = turma;
-      }
-     
 
 };

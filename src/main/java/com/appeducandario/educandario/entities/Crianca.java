@@ -1,22 +1,24 @@
-package com.appeducandario.educandario.entites;
+package com.appeducandario.educandario.entities;
 
-// import org.apache.commons.math3.analysis.function.Identity;
+import jakarta.persistence.*;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-Identity
+import java.util.Set;
+
+@Entity
 @Table(name="tb_criancas")
-public class Criancas {
-      @Id
+public class Crianca {
+    @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private String nome;
     private String dataNascimento;
     private String turma;
 
-    public Criancas () {
+    @ManyToMany
+    @JoinTable(name = "CRIANCA_ATIVIDADE_MAPPING", joinColumns = @JoinColumn(name ="crianca_id"), inverseJoinColumns = @JoinColumn(name = "atividade_id"))
+    private Set<Atividade> atividades;
+
+    public Crianca() {
     }
 
     public Long getId(){
