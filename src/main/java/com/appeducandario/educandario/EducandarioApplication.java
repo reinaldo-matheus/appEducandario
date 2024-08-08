@@ -6,10 +6,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class EducandarioApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(EducandarioApplication.class, args);
-		System.out.print("Hello world");
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(EducandarioApplication.class, args);
+    }
 
 }
 
